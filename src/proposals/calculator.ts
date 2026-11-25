@@ -2,7 +2,9 @@ import {
   convert,
   divideRoundHalfUp,
   formatMoney,
+  getCurrency,
   isCurrencyCode,
+  roundHalfUp,
   type CurrencyCode,
 } from "../pricing/currency.js";
 
@@ -102,9 +104,12 @@ export function buildProposal(input: unknown): Proposal {
   const subtotalUsd = fromCents(subtotalCents);
   const discountUsd = fromCents(discountCents);
   const totalUsd = fromCents(totalCents);
-  // Discount in USD first, then one conversion of the net. Rounding the
-  // converted subtotal before the discount moves a half-unit the other way.
-  const total = convert(totalUsd, "USD", currency);
+  // Apply the discount to the rounded quote-currency subtotal so the PDF
+  // identity "subtotal - discount = total" holds in the customer's currency.
+  const digits = getCurrency(currency).minorUnits;
+  const subtotal = convert(subtotalUsd, "USD", currency);
+  const discount = roundHalfUp(subtotal * discountRate, digits);
+  const total = roundHalfUp(subtotal - discount, digits);
 
   return {
     currency,
