@@ -1,0 +1,4 @@
+# Protected paths. A human must review these. Do not auto-merge.
+/src/auth/    @PSchmidt23
+/migrations/  @PSchmidt23
+/infra/       @PSchmidt23
