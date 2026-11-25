@@ -1,0 +1,29 @@
+{
+  "name": "demo-commercial-app",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Northstar Deal Room: multi-currency proposal quotes with a mock Entra ID check.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "tsx src/server.ts",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/express": "^5.0.5",
+    "@types/node": "^22.19.3",
+    "eslint": "^10.15.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.74.0",
+    "vitest": "^5.1.2"
+  }
+}
