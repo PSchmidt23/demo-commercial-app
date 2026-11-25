@@ -1,3 +1,5 @@
+import { randomUUID } from "node:crypto";
+
 /**
  * Indicative FX for deal-room quotes. Rates are static on purpose.
  * `unitsPerUsd` is how many units of that currency one US dollar buys.
@@ -86,7 +88,7 @@ export function formatMoney(amount: number, code: CurrencyCode): string {
   return `${negative ? "-" : ""}${currency.symbol}${body}`;
 }
 
-function parseRate(unitsPerUsd: number): { num: bigint; den: bigint } {
+function parseRate(unitsPerUsd: number): number {
   const match = /^(\d+)(?:\.(\d+))?$/.exec(unitsPerUsd.toString());
   if (!match?.[1]) {
     throw new Error(`FX rate is not a decimal: ${unitsPerUsd}`);
